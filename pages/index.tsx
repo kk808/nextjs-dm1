@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import React from 'react';
 
 // @ts-ignore
 import Notification from '@webjet/react/components/notification' 
@@ -12,7 +13,21 @@ import IconFood from '@webjet/react-icons/food';
 import IconParking from '@webjet/react-icons/parking';
 
 // @ts-ignore
+import Banner from '@webjet/react/components/banner';
+
+// @ts-ignore
+import Link from '@webjet/react/components/link';
+
+// @ts-ignore
+import Button from "@webjet/react/components/button";
+// @ts-ignore
+import { Modal } from "@webjet/react/components/modal";
+
+// @ts-ignore
 import Select from '@webjet/react/components/select'
+
+// @ts-ignore
+import NavigationProductsMenu from '@webjet/react/components/navigation-products-menu';
 
 const optionList = [
   { value: 'Economy', label: 'Economy' },
@@ -21,7 +36,48 @@ const optionList = [
   { value: 'First', label: 'First' }
 ]
 
+const primaryLinks = [{
+  label: 'Flights',
+  href: 'https://www.webjet.com.au/flights/',
+  active: true
+}, {
+  label: 'Hotels',
+  href: 'https://hotels.webjet.com.au/hotels/'
+}, {
+  label: 'Packages',
+  href: 'https://packages.webjet.com.au/packages/'
+}, {
+  label: 'Cars',
+  href: 'https://www.webjet.com.au/car-hire/'
+}, {
+  label: 'Motorhomes',
+  href: 'https://motorhomes.webjet.com.au/'
+}, {
+  label: 'Things To Do',
+  href: 'https://thingstodo.webjet.com.au/en-AU/?aid=34307&utm_medium=affiliate-alwayson&utm_source=non-network&utm_campaign=34307&utm_term&utm_content',
+  target: 'blank'
+}, {
+  label: 'Insurance',
+  href: 'https://insurance.webjet.com.au/',
+  target: 'blank'
+}, {
+  label: 'Gift Cards',
+  href: 'https://www.webjet.com.au/about/giftcards/'
+}
+];
+
+const secondaryLinks = [{
+  label: 'Domestic Deals',
+  href: ''
+}, {
+  label: 'International Deals',
+  href: ''
+}
+];
+
 export default function Home () {
+  const [show, setShow] = React.useState(false);
+
   return (
     <>
       <Head>
@@ -32,36 +88,57 @@ export default function Home () {
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet" />
       </Head>
       <main>
-        <h2>Notification</h2>
-        <Notification type='success' prominence='high'>
-          <h3>This is the heading for the notification.</h3>
-          This is the body text that is used within a notification.
-        </Notification>
-        <br />
-        <Notification type='info' prominence='high'>
-          <h3>This is the heading for the notification.</h3>
-          This is the body text that is used within a notification.
-        </Notification>
+        {/* <NavigationProductsMenu primaryLinks={primaryLinks} secondaryLinks={secondaryLinks} /> */}
+        
+        <div className='w-800'>
+          <h2>Notification</h2>
+          <Notification type='success' prominence='high'>
+            <h3>This is the heading for the notification.</h3>
+            This is the body text that is used within a notification.
+          </Notification>
+          <br />
+          <Notification type='info' prominence='high'>
+            <h3>This is the heading for the notification.</h3>
+            This is the body text that is used within a notification.
+          </Notification>
 
-        <h2>Accordion</h2>
-        <Accordion heading='Guest services' icon={IconGuestServices} headingBgColor='#FFFFFF' arrowType='arrow' isExpanded={false}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit aliquam feugiat
-        </Accordion>
-        <Accordion heading='Food & Drink' icon={IconFood} headingBgColor='#FFFFFF' arrowType='arrow' isExpanded={false}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit aliquam feugiat
-        </Accordion>
-        <Accordion heading='Parking & Transport' icon={IconParking} headingBgColor='#FFFFFF' arrowType='arrow' isExpanded={false}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit aliquam feugiat
-        </Accordion>
+          <h2>Banner</h2>
+          <Banner isMultiline={false}>
+            <h3>Lorem ipsum.</h3>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit aliquam feugiat. <Link href="#">*T&C's apply.</Link>
+          </Banner>
 
-
-          {/* <Select
+          <h2>Accordion</h2>
+          <Accordion heading='Guest services' icon={IconGuestServices} headingBgColor='#FFFFFF' arrowType='arrow' isExpanded={false}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit aliquam feugiat
+          </Accordion>
+          <Accordion heading='Food & Drink' icon={IconFood} headingBgColor='#FFFFFF' arrowType='arrow' isExpanded={false}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit aliquam feugiat
+          </Accordion>
+          <Accordion heading='Parking & Transport' icon={IconParking} headingBgColor='#FFFFFF' arrowType='arrow' isExpanded={false}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit aliquam feugiat
+          </Accordion>
+        </div>
+        <div className='w-300'>
+          <h2>Select List</h2>
+          <Select
             placeholder='Please select one'
             options={optionList}
             portalTarget={false}
-            gaProps={{ event: 'select-interaction' }}
             name='fare-types'
-          /> */}
+            />
+        </div>
+
+        <h2>Modal</h2>
+
+        <div className="demo">
+            <Modal show={show} title="Lorem ipsum" closeBtnText="Close" onToggle={() => setShow(!show)}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </Modal>
+            <Button version={2} onClick={() => setShow(!show)}>
+              Show modal
+            </Button>
+        </div>
       </main>
     </>
   )
