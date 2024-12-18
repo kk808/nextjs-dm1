@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@webjet/react": "3.14.0",
+    "@webjet/react": "3.14.1",
     "@webjet/react-icons": "^3.7.9",
-    "next": "13.5.7",
+    "next": "15.1.1",
     "react": "^18",
     "react-dom": "^18"
   },

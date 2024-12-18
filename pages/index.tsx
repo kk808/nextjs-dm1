@@ -27,7 +27,7 @@ import { Modal } from "@webjet/react/components/modal";
 import Select from '@webjet/react/components/select'
 
 // @ts-ignore
-import NavigationProductsMenu from '@webjet/react/components/navigation-products-menu';
+import ProductNavigation from '@webjet/react/components/product-navigation';
 
 const optionList = [
   { value: 'Economy', label: 'Economy' },
@@ -38,40 +38,41 @@ const optionList = [
 
 const primaryLinks = [{
   label: 'Flights',
-  href: 'https://www.webjet.com.au/flights/',
+  href: '#',
   active: true
 }, {
   label: 'Hotels',
-  href: 'https://hotels.webjet.com.au/hotels/'
+  href: '#hotels'
 }, {
   label: 'Packages',
-  href: 'https://packages.webjet.com.au/packages/'
+  href: '#pacakges'
 }, {
   label: 'Cars',
-  href: 'https://www.webjet.com.au/car-hire/'
+  href: '#/cars'
 }, {
   label: 'Motorhomes',
-  href: 'https://motorhomes.webjet.com.au/'
+  href: '#',
+  target: 'blank'
 }, {
   label: 'Things To Do',
-  href: 'https://thingstodo.webjet.com.au/en-AU/?aid=34307&utm_medium=affiliate-alwayson&utm_source=non-network&utm_campaign=34307&utm_term&utm_content',
+  href: '#',
   target: 'blank'
 }, {
   label: 'Insurance',
-  href: 'https://insurance.webjet.com.au/',
+  href: '#',
   target: 'blank'
 }, {
   label: 'Gift Cards',
-  href: 'https://www.webjet.com.au/about/giftcards/'
+  href: '#'
 }
 ];
 
 const secondaryLinks = [{
   label: 'Domestic Deals',
-  href: ''
+  href: '#'
 }, {
   label: 'International Deals',
-  href: ''
+  href: '#'
 }
 ];
 
@@ -88,7 +89,7 @@ export default function Home () {
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet" />
       </Head>
       <main>
-        {/* <NavigationProductsMenu primaryLinks={primaryLinks} secondaryLinks={secondaryLinks} /> */}
+        <ProductNavigation primaryLinks={primaryLinks} secondaryLinks={secondaryLinks} />
         
         <div className='w-800'>
           <h2>Notification</h2>
