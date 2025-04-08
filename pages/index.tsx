@@ -36,48 +36,40 @@ const optionList = [
   { value: 'First', label: 'First' }
 ]
 
-const primaryLinks = [{
-  label: 'Flights',
-  href: '#',
-  active: true
-}, {
-  label: 'Hotels',
-  href: '#hotels'
-}, {
-  label: 'Packages',
-  href: '#pacakges'
-}, {
-  label: 'Cars',
-  href: '#/cars'
-}, {
-  label: 'Motorhomes',
-  href: '#',
-  target: 'blank'
-}, {
-  label: 'Things To Do',
-  href: '#',
-  target: 'blank'
-}, {
-  label: 'Insurance',
-  href: '#',
-  target: 'blank'
-}, {
-  label: 'Gift Cards',
-  href: '#'
-}
-];
 
-const secondaryLinks = [{
-  label: 'Domestic Deals',
-  href: '#'
-}, {
-  label: 'International Deals',
-  href: '#'
+type Navigation = {
+  productNavigation: {
+    primary: {
+      title: string
+      keys: string[]
+    }
+    secondary: {
+      title: string
+      keys: string[]
+    }
+  }
+  links: {
+    [key: string]: {
+      label: string
+      href: string
+      target?: string
+    }
+  }
 }
-];
 
-export default function Home () {
+export const getServerSideProps = async () => {
+  // Fetch data from external config module
+  const response = await fetch('https://static.dev.webjet.com.au/web/ui/poc/navigation/newconfig/config.1744087004419.js');
+  const jsConfig = await response.text()
+  const configDataUri = 'data:text/javascript;charset=utf-8,' + encodeURIComponent(jsConfig)
+  const navigation: Navigation = await import(/* webpackIgnore: true */configDataUri).then(module => module.default)
+  return { props: { navigation } }
+}
+
+export default function Home ({ navigation }: { navigation: Navigation }) {
   const [show, setShow] = React.useState(false);
+  const {productNavigation, links} = navigation || {};
+  const { primary, secondary } = productNavigation || {};
 
   return (
     <>
@@ -89,7 +81,7 @@ export default function Home () {
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet" />
       </Head>
       <main>
-        <ProductNavigation primaryLinks={primaryLinks} secondaryLinks={secondaryLinks} />
+        <ProductNavigation primary={primary} secondary={secondary} links={links} activeItem='flights' />
         
         <div className='w-800'>
           <h2>Notification</h2>
