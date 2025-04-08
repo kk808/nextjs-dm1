@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@webjet/react": "3.14.1",
+    "@webjet/react": "4.0.2",
     "@webjet/react-icons": "^3.7.9",
     "next": "15.1.1",
     "react": "^18",
