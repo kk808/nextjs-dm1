@@ -59,10 +59,8 @@ type Navigation = {
 
 export const getServerSideProps = async () => {
   // Fetch data from external config module
-  const response = await fetch('https://static.dev.webjet.com.au/web/ui/poc/navigation/newconfig/config.1744087004419.js');
-  const jsConfig = await response.text()
-  const configDataUri = 'data:text/javascript;charset=utf-8,' + encodeURIComponent(jsConfig)
-  const navigation: Navigation = await import(/* webpackIgnore: true */configDataUri).then(module => module.default)
+  const response = await fetch('https://static.dev.webjet.com.au/web/ui/poc/navigation/newconfig/config.json');
+  const navigation: Navigation = await response.json()
   return { props: { navigation } }
 }
 
